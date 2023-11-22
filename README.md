@@ -12,17 +12,23 @@ This is a intermideiate Javascript practice, making password generator app for a
 
 ## Roadmap
 
-- [] Generate a password when the button is clicked
-  - [] Present a series of prompts for password criteria
-    - [x] Length of password
-      - [x] At least 8 characters but no more than 128.
-    - [] Character types
-      - [x] Lowercase
-      - [x] Uppercase
-      - [x] Numeric
-      - [x] Special characters ($@%&\*, etc)
-  - [] Code should validate for each input and at least one character type should be selected
-  - [] Once prompts are answered then the password should be generated and displayed in an alert or written to the page
+- [] Generate a password when the button is clicked.
+- [] Present a series of prompts for password criteria
+  - [x] Length of password: ask a user how long a password the user wants to be
+  - [x] At least 8 characters but no more than 128: state and set the condition to the user
+  - [] Character types: confirm a user for the restriction below
+    - [x] Lowercase
+    - [x] Uppercase
+    - [x] Numeric
+    - [x] Special characters ($@%&\*, etc)
+- [] Code should validate for each input and at least one character type should be selected above
+- [] Once prompts are answered then the password should be generated and displayed in an alert or written to the page
+- [] Store an user's answers with key
+- [] Use the answers with the key to generate the code
+- [] Check if the codes meet the all requirements above
+- [] Refactor the codes, names, and logic.
+- [] Update the readme again for the clarification
+- [] Deploy it to the github
 
 These roadmap result will look like thepicture below
 
