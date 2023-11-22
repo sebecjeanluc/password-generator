@@ -88,23 +88,90 @@ var upperCasedCharacters = [
 	'Z',
 ]
 
-// click the button
-// ask users for the length of password betwen 8-128
-// if a user answer below 8 or above 128, decline
-// comfirms user of four character types
-// if a user rejects all, decline the generation
-// if requirements meet all, generate the random password of the user's chosen length and show the result in the display.
+var outOfRangeMessage =
+	'Your number is not within the range. Click the button again.'
+
+var noneOfCharacterTypesMessage =
+	'You may accept one of the character types. Please hit the button again to start over.'
+
+// store the character type questions in object
+var questionsToUser = {
+	'Special character': function (answer) {
+		var userCharacterChoice = confirm(
+			'Would you like your password include Special characters?'
+		)
+		return userCharacterChoice
+	},
+	Numeric: function (answer) {
+		var userNumericChoice = confirm(
+			'Would you like your password include numbers?'
+		)
+		return userNumericChoice
+	},
+	Uppercase: function (answer) {
+		var userNumericChoice = confirm(
+			'Would you like your password include Uppercase?'
+		)
+		return userNumericChoice
+	},
+	Lowercase: function (answer) {
+		var userNumericChoice = confirm(
+			'Would you like your password include Lowercase?'
+		)
+		return userNumericChoice
+	},
+}
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-	alert('Hello')
+	// ask users for the length of password betwen 8 - 128
+	var userInputPasswordLength = prompt(
+		"Please type your password's length between 8 - 120. You will get error if your choice is out range."
+	)
+	// make sure to convert the input to int
+	userInputPasswordLength = parseInt(userInputPasswordLength)
+
+	// handling non number or string answer
+	if (isNaN(userInputPasswordLength)) {
+		alert(outOfRangeMessage + 'Please type a number. ')
+		// if a user answer below 8 or above 128, decline
+	} else if (userInputPasswordLength < 8 || userInputPasswordLength > 128) {
+		alert(outOfRangeMessage)
+	} else {
+		// store user's answer in array
+		var userCharacterChoices = {}
+		// comfirms user of four character types
+		for (var question in questionsToUser) {
+			userCharacterChoices[question] = questionsToUser[question]()
+			// console.log('question ' + question)
+			// console.log('guestionsToUser ' + questionsToUser)
+			// console.log('userAnswersArray ' + userAnswersArray)
+
+			console.log(question, userCharacterChoices[question])
+		}
+		// if a user rejects all, decline the generation
+		var atLeastOneTypeSelected = false
+		for (var i = 0; i < userAnswersArray.length; i++) {
+			if (userAnswers[i] === true) {
+				atLeastOneTypeSelected = true
+			}
+		}
+		if (atLeastOneTypeSelected) {
+			alert(noneOfCharacterTypesMessage)
+			return
+		}
+	}
+	// if requirements meet all, generate the random password of the user's chosen length and show the result in the display.
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {}
 
 // Function to generate password with user input
-function generatePassword() {}
+function generatePassword() {
+	getPasswordOptions()
+	return 'hello'
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate')
@@ -115,6 +182,8 @@ function writePassword() {
 	var passwordText = document.querySelector('#password')
 
 	passwordText.value = password
+
+	return
 }
 
 // Add event listener to generate button
