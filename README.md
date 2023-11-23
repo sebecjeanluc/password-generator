@@ -23,12 +23,23 @@ This is a intermideiate Javascript practice, making password generator app for a
     - [x] Special characters ($@%&\*, etc)
 - [] Code should validate for each input and at least one character type should be selected above
 - [] Once prompts are answered then the password should be generated and displayed in an alert or written to the page
-- [] Store an user's answers with key
-- [] Use the answers with the key to generate the code
-- [] Check if the codes meet the all requirements above
-- [] Refactor the codes, names, and logic.
-- [] Update the readme again for the clarification
-- [] Deploy it to the github
+
+## Pseudocode
+
+- [x] Store questions in objects
+- [x] Create an function of password length
+  - [x] Make sure to convert string to number
+- [x] In the same function, ask character types
+  - [x] Lowercase
+  - [x] Uppercase
+  - [x] Numeric
+  - [x] Special characters ($@%&\*, etc)
+  - [x] Store the user's answers
+    - [x] Set a condition of one type has to be selected
+- [] Create an function based on the user's selected types
+  - [] Get at least one character from the selected types
+  - [] Generate the password with the user's length
+- [] Display the password to the display
 
 These roadmap result will look like thepicture below
 

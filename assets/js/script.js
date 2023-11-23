@@ -143,10 +143,6 @@ function getPasswordOptions() {
 		// comfirms user of four character types
 		for (var question in questionsToUser) {
 			userCharacterChoices[question] = questionsToUser[question]()
-			// console.log('question ' + question)
-			// console.log('guestionsToUser ' + questionsToUser)
-			// console.log('userAnswersArray ' + userAnswersArray)
-
 			console.log(question, userCharacterChoices[question])
 		}
 		// if a user rejects all, decline the generation
@@ -154,23 +150,62 @@ function getPasswordOptions() {
 		for (var i = 0; i < userAnswersArray.length; i++) {
 			if (userAnswers[i] === true) {
 				atLeastOneTypeSelected = true
+				break
 			}
 		}
-		if (atLeastOneTypeSelected) {
+		if (!atLeastOneTypeSelected) {
 			alert(noneOfCharacterTypesMessage)
 			return
 		}
 	}
-	// if requirements meet all, generate the random password of the user's chosen length and show the result in the display.
 }
 
 // Function for getting a random element from an array
-function getRandom(arr) {}
+function getRandomCharacterFromString(string) {
+	// Generate a random index based on the length of the array
+	var randomIndex = Math.floor(Math.random() * string.length)
+	return string[randomIndex]
+}
+
+var password = ''
+
+if (userCharacterChoice['Special character']) {
+	password += getRandomCharacterFromString(specialCharacters)
+}
+if (userCharacterChoice['Numeric']) {
+	password += getRandomCharacterFromString(numericCharacters)
+}
+if (userCharacterChoice['Uppercase']) {
+	password += getRandomCharacterFromString(upperCaseCharacters)
+}
+if (userCharacterChoice['Lowercase']) {
+	password += getRandomCharacterFromString(lowerCaseCharacters)
+}
+
+var allSelectedCharacters = ''
+
+if (userCharacterChoices['Special character']) {
+	allSelectedCharacters += specialCharacters
+}
+if (userCharacterChoices['Numeric']) {
+	allSelectedCharacters += numericCharacters
+}
+if (userCharacterChoices['Uppercase']) {
+	allSelectedCharacters += upperCharacters
+}
+if (userCharacterChoices['Lowercase']) {
+	allSelectedCharacters += lowerCharacters
+}
+
+while (password.length < userInputPasswordLength) {
+	password += getRandomCharacterFromString(allSelectedCharacters)
+}
+
+console.log(password)
 
 // Function to generate password with user input
 function generatePassword() {
 	getPasswordOptions()
-	return 'hello'
 }
 
 // Get references to the #generate element
@@ -188,34 +223,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword)
-
-// function getRandomeLetterFromArray(arrayOfLetters) {
-// 	// Generate a random index based on the length of the array
-// 	var randomIndex = Math.floor(Math.random() * arrayOfLetters.length)
-// 	return arrayOfLetters[randomIndex]
-// }
-
-// // generate random numbers between 8 to 128
-// var maxNum = 128
-// var minNum = 8
-// var rangeSize = 128 - 8 - 1
-// var randomLength = Math.floor(Math.random() * rangeSize) + minNum
-
-// // Set an empty array to store letters&numbers&SpecialCharacters
-// var randomLetters = []
-
-// // pick one from each arrays
-// randomLetters += getRandomeLetterFromArray(numericCharacters)
-// randomLetters += getRandomeLetterFromArray(specialCharacters)
-// randomLetters += getRandomeLetterFromArray(lowerCasedCharacters)
-// randomLetters += getRandomeLetterFromArray(upperCasedCharacters)
-
-// // combined four arrays into one array
-// var fourCombinedArrays = numericCharacters.concat(
-// 	specialCharacters,
-// 	lowerCasedCharacters,
-// 	upperCasedCharacters
-// )
 
 // // substract four letters from the array becasue already picked them above.
 // for (var i = 4; i < randomLength; i++) {
