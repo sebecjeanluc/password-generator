@@ -96,7 +96,7 @@ var noneOfCharacterTypesMessage =
 
 // store the character type questions in object
 var questionsToUser = {
-	'Special character': function (answer) {
+	SpecialCharacter: function (answer) {
 		var userCharacterChoice = confirm(
 			'Would you like your password include Special characters?'
 		)
@@ -124,88 +124,123 @@ var questionsToUser = {
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-	// ask users for the length of password betwen 8 - 128
-	var userInputPasswordLength = prompt(
-		"Please type your password's length between 8 - 120. You will get error if your choice is out range."
-	)
-	// make sure to convert the input to int
-	userInputPasswordLength = parseInt(userInputPasswordLength)
+	// Initiatize userInputLength
+	var userInputPasswordLength = 0
+	var atLeastOneTypeSelected = false
+	var isValidLength = false
+	var userCharacterChoices = {}
 
-	// handling non number or string answer
-	if (isNaN(userInputPasswordLength)) {
-		alert(outOfRangeMessage + 'Please type a number. ')
-		// if a user answer below 8 or above 128, decline
-	} else if (userInputPasswordLength < 8 || userInputPasswordLength > 128) {
-		alert(outOfRangeMessage)
-	} else {
-		// store user's answer in array
-		var userCharacterChoices = {}
+	while (!isValidLength || !atLeastOneTypeSelected) {
+		var lengthInput = prompt(
+			"Please type your password's length between 8 - 120. You will get error if your choice is out range."
+		)
+		// trim the space and convert a string to int
+		userInputPasswordLength = parseInt(lengthInput.trim())
+
+		// handling non number or string answer
+		if (
+			!isNaN(userInputPasswordLength) &&
+			userInputPasswordLength >= 8 &&
+			userInputPasswordLength <= 128
+		) {
+			isValidLength = true
+		} else {
+			alert(outOfRangeMessage + 'Please type a number. ')
+			// while continue until the user input a number the right ratnge
+			continue
+		}
+
 		// comfirms user of four character types
 		for (var question in questionsToUser) {
 			userCharacterChoices[question] = questionsToUser[question]()
-			console.log(question, userCharacterChoices[question])
 		}
-		// if a user rejects all, decline the generation
-		var atLeastOneTypeSelected = false
-		for (var i = 0; i < userAnswersArray.length; i++) {
-			if (userAnswers[i] === true) {
-				atLeastOneTypeSelected = true
-				break
-			}
-		}
+
+		// Validate if user select at least one character type
+		atLeastOneTypeSelected = Object.values(userCharacterChoices).includes(true)
+
 		if (!atLeastOneTypeSelected) {
-			alert(noneOfCharacterTypesMessage)
-			return
+			return alert(noneOfCharacterTypesMessage)
+		}
+		var passwordOptions = {
+			length: userInputPasswordLength,
+			choices: userCharacterChoices,
 		}
 	}
+	return passwordOptions
 }
+
+// object of {length: 8-128, choices: key: blooean}
+// console.log(getPasswordOptions())
 
 // Function for getting a random element from an array
-function getRandomCharacterFromString(string) {
+function getRandomCharacterFromArray(array) {
 	// Generate a random index based on the length of the array
-	var randomIndex = Math.floor(Math.random() * string.length)
-	return string[randomIndex]
+	var randomIndex = Math.floor(Math.random() * array.length)
+	return array[randomIndex]
 }
 
-var password = ''
+// pick the true choices of random number from array, fill the rest of the length of number of user length
+function generatePassword() {
+	var password = []
+	var passwordOption = getPasswordOptions()
+	// console.log(passwordOption.choices.SpecialCharacter)
+	if (passwordOption.choices.SpecialCharacter) {
+		//if true
+		password.push(getRandomCharacterFromArray(specialCharacters))
+	}
+	console.log(password)
+	if (passwordOption.choices.Numeric) {
+		//if true
+		password.push(getRandomCharacterFromArray(numericCharacters))
+	}
+	console.log(password)
 
-if (userCharacterChoice['Special character']) {
-	password += getRandomCharacterFromString(specialCharacters)
-}
-if (userCharacterChoice['Numeric']) {
-	password += getRandomCharacterFromString(numericCharacters)
-}
-if (userCharacterChoice['Uppercase']) {
-	password += getRandomCharacterFromString(upperCaseCharacters)
-}
-if (userCharacterChoice['Lowercase']) {
-	password += getRandomCharacterFromString(lowerCaseCharacters)
-}
+	if (passwordOption.choices.Uppercase) {
+		//if true
+		password.push(getRandomCharacterFromArray(upperCasedCharacters))
+	}
+	console.log(password)
 
-var allSelectedCharacters = ''
+	if (passwordOption.choices.Lowercase) {
+		//if true
+		password.push(getRandomCharacterFromArray(lowerCasedCharacters))
+	}
+	console.log(password)
 
-if (userCharacterChoices['Special character']) {
-	allSelectedCharacters += specialCharacters
+	// go through the choices which one types are picked and count the number and
+	// substract the number for the remaining number
+	// generate the random characters for the rest.
+	console.log()
 }
-if (userCharacterChoices['Numeric']) {
-	allSelectedCharacters += numericCharacters
-}
-if (userCharacterChoices['Uppercase']) {
-	allSelectedCharacters += upperCharacters
-}
-if (userCharacterChoices['Lowercase']) {
-	allSelectedCharacters += lowerCharacters
-}
+generatePassword()
 
-while (password.length < userInputPasswordLength) {
-	password += getRandomCharacterFromString(allSelectedCharacters)
-}
-
-console.log(password)
+// create an function of those true number from array
 
 // Function to generate password with user input
-function generatePassword() {
-	getPasswordOptions()
+function generatePassword2(options) {
+	var password = ''
+	var possibleCharacters = []
+	var guaranteeedCharacters = []
+
+	// Add guaranteed characters to the password
+	for (var i = 0; i < guaranteedCharacters.length; i++) {
+		password += guaranteedCharacters[i]
+	}
+
+	// Fill the rest of the password length with random characters from the possibleCharacters array
+	for (var i = password.length; i < options.length; i++) {
+		password += getRandomCharacterFromArray(possibleCharacters)
+	}
+
+	// Shuffle the password to prevent guaranteed characters from clustering at the beginning
+	password = password
+		.split('')
+		.sort(function () {
+			return 0.5 - Math.random()
+		})
+		.join('')
+
+	return password
 }
 
 // Get references to the #generate element
