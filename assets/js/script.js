@@ -122,6 +122,29 @@ var questionsToUser = {
 	},
 }
 
+// create function that picks random items from array with certain numbers
+function getMultipleArrayItems(number) {
+	// combine all the array
+	var randomArrayItems = []
+	var allArrays = specialCharacters.concat(
+		numericCharacters,
+		lowerCasedCharacters,
+		upperCasedCharacters
+	)
+	// shuffle the array
+	allArrays.sort(() => Math.random() - 0.5)
+	// console.log(allArrays)
+	// number = 9
+	// Add items of the number from the array
+	for (var i = 0; number > i; i++) {
+		randomArrayItems += allArrays[i % allArrays.length]
+		// console.log(randomArrayItems)
+	}
+	return randomArrayItems
+}
+
+// console.log(getMultipleArrayItems(128))
+
 // Function to prompt user for password options
 function getPasswordOptions() {
 	// Initiatize userInputLength
@@ -205,41 +228,21 @@ function generatePassword() {
 		//if true
 		password.push(getRandomCharacterFromArray(lowerCasedCharacters))
 	}
-	console.log(password)
+	console.log("User's selected types: " + password)
 
-	// go through the choices which one types are picked and count the number and
+	//count the selected types
+	console.log('The number of selected types: ' + password.length)
+
+	// The user's choice of number
+	console.log("The user's selected number: " + passwordOption.length)
 	// substract the number for the remaining number
+	var restOfPassword = passwordOption.length - password.length
+	console.log('The rest of password: ' + restOfPassword)
 	// generate the random characters for the rest.
-	console.log()
-}
-generatePassword()
-
-// create an function of those true number from array
-
-// Function to generate password with user input
-function generatePassword2(options) {
-	var password = ''
-	var possibleCharacters = []
-	var guaranteeedCharacters = []
-
-	// Add guaranteed characters to the password
-	for (var i = 0; i < guaranteedCharacters.length; i++) {
-		password += guaranteedCharacters[i]
-	}
-
-	// Fill the rest of the password length with random characters from the possibleCharacters array
-	for (var i = password.length; i < options.length; i++) {
-		password += getRandomCharacterFromArray(possibleCharacters)
-	}
-
-	// Shuffle the password to prevent guaranteed characters from clustering at the beginning
-	password = password
-		.split('')
-		.sort(function () {
-			return 0.5 - Math.random()
-		})
-		.join('')
-
+	var restOfCharacters = getMultipleArrayItems(restOfPassword)
+	// combine user's selection and the rest array
+	var password = password.concat(restOfCharacters)
+	password = password.join('')
 	return password
 }
 
@@ -258,31 +261,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword)
-
-// // substract four letters from the array becasue already picked them above.
-// for (var i = 4; i < randomLength; i++) {
-// 	randomLetters += getRandomeLetterFromArray(fourCombinedArrays)
-// }
-
-// console.log('rondomeLetters length ' + randomLetters.length)
-// console.log('randomeLetters ' + randomLetters)
-
-// // Validator for checking all number is included above
-// // loop the randomLetters and check if each array contains one of the case or not.
-
-// var doesArrayGotOneValidator = function (sourceString, targetArray) {
-// 	var isFound = false
-// 	for (var i = 0; targetArray.length > i; i++) {
-// 		var currentCharacter = targetArray[i]
-// 		// if its found, its 0 or positive int but if not, it will be -1 so opposite it. Works same if it is">=0"
-// 		if (sourceString.indexOf(currentCharacter) !== -1) {
-// 			console.log('found one!')
-// 			isFound = true
-// 		}
-// 	}
-// 	return isFound
-// }
-// doesArrayGotOneValidator(randomLetters, specialCharacters)
-// doesArrayGotOneValidator(randomLetters, numericCharacters)
-// doesArrayGotOneValidator(randomLetters, lowerCasedCharacters)
-// doesArrayGotOneValidator(randomLetters, upperCasedCharacters)
