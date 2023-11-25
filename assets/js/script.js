@@ -211,33 +211,33 @@ function generatePassword() {
 		//if true
 		password.push(getRandomCharacterFromArray(specialCharacters))
 	}
-	console.log(password)
+	// console.log(password)
 	if (passwordOption.choices.Numeric) {
 		//if true
 		password.push(getRandomCharacterFromArray(numericCharacters))
 	}
-	console.log(password)
+	// console.log(password)
 
 	if (passwordOption.choices.Uppercase) {
 		//if true
 		password.push(getRandomCharacterFromArray(upperCasedCharacters))
 	}
-	console.log(password)
+	// console.log(password)
 
 	if (passwordOption.choices.Lowercase) {
 		//if true
 		password.push(getRandomCharacterFromArray(lowerCasedCharacters))
 	}
-	console.log("User's selected types: " + password)
+	// console.log("User's selected types: " + password)
 
 	//count the selected types
-	console.log('The number of selected types: ' + password.length)
+	// console.log('The number of selected types: ' + password.length)
 
 	// The user's choice of number
-	console.log("The user's selected number: " + passwordOption.length)
+	// console.log("The user's selected number: " + passwordOption.length)
 	// substract the number for the remaining number
 	var restOfPassword = passwordOption.length - password.length
-	console.log('The rest of password: ' + restOfPassword)
+	// console.log('The rest of password: ' + restOfPassword)
 	// generate the random characters for the rest.
 	var restOfCharacters = getMultipleArrayItems(restOfPassword)
 	// combine user's selection and the rest array

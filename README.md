@@ -12,34 +12,17 @@ This is a intermideiate Javascript practice, making password generator app for a
 
 ## Roadmap
 
-- [] Generate a password when the button is clicked.
-- [] Present a series of prompts for password criteria
+- [x] Generate a password when the button is clicked.
+- [x] Present a series of prompts for password criteria
   - [x] Length of password: ask a user how long a password the user wants to be
   - [x] At least 8 characters but no more than 128: state and set the condition to the user
-  - [] Character types: confirm a user for the restriction below
+  - [x] Character types: confirm a user for the restriction below
     - [x] Lowercase
     - [x] Uppercase
     - [x] Numeric
     - [x] Special characters ($@%&\*, etc)
 - [] Code should validate for each input and at least one character type should be selected above
-- [] Once prompts are answered then the password should be generated and displayed in an alert or written to the page
-
-## Pseudocode
-
-- [x] Store questions in objects
-- [x] Create an function of password length
-  - [x] Make sure to convert string to number
-- [x] In the same function, ask character types
-  - [x] Lowercase
-  - [x] Uppercase
-  - [x] Numeric
-  - [x] Special characters ($@%&\*, etc)
-  - [x] Store the user's answers
-    - [x] Set a condition of one type has to be selected
-- [] Create an function based on the user's selected types
-  - [] Get at least one character from the selected types
-  - [] Generate the password with the user's length
-- [] Display the password to the display
+- [x] Once prompts are answered then the password should be generated and displayed in an alert or written to the page
 
 These roadmap result will look like thepicture below
 
@@ -49,13 +32,13 @@ These roadmap result will look like thepicture below
 
 This is a Javascript practice for the bootcamp project.
 
-### Brower Console Preview
+### Preview
 
-![Preview](./consoleFinances.png) (will be added later)
+![Preview](./assets/images/demo.png)
 
 #### This is the Github page
 
-[Console-Finances](https://sebecjeanluc.github.io/password-generator/)
+[password-generator](https://sebecjeanluc.github.io/password-generator/)
 
 ### Credits
 
