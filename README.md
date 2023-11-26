@@ -12,17 +12,17 @@ This is a intermideiate Javascript practice, making password generator app for a
 
 ## Roadmap
 
-- [] Generate a password when the button is clicked
-  - [] Present a series of prompts for password criteria
-    - [] Length of password
-      - [] At least 8 characters but no more than 128.
-    - [] Character types
-      - [] Lowercase
-      - [] Uppercase
-      - [] Numeric
-      - [] Special characters ($@%&\*, etc)
-  - [] Code should validate for each input and at least one character type should be selected
-  - [] Once prompts are answered then the password should be generated and displayed in an alert or written to the page
+- [x] Generate a password when the button is clicked.
+- [x] Present a series of prompts for password criteria
+  - [x] Length of password: ask a user how long a password the user wants to be
+  - [x] At least 8 characters but no more than 128: state and set the condition to the user
+  - [x] Character types: confirm a user for the restriction below
+    - [x] Lowercase
+    - [x] Uppercase
+    - [x] Numeric
+    - [x] Special characters ($@%&\*, etc)
+- [x] Code should validate for each input and at least one character type should be selected above
+- [x] Once prompts are answered then the password should be generated and displayed in an alert or written to the page
 
 These roadmap result will look like thepicture below
 
@@ -32,13 +32,13 @@ These roadmap result will look like thepicture below
 
 This is a Javascript practice for the bootcamp project.
 
-### Brower Console Preview
+### Preview
 
-![Preview](./consoleFinances.png) (will be added later)
+![Preview](./assets/images/demo.png)
 
 #### This is the Github page
 
-[Console-Finances](https://sebecjeanluc.github.io/password-generator/)
+[password-generator](https://sebecjeanluc.github.io/password-generator/)
 
 ### Credits
 
