@@ -21,7 +21,7 @@ This is a intermideiate Javascript practice, making password generator app for a
     - [x] Uppercase
     - [x] Numeric
     - [x] Special characters ($@%&\*, etc)
-- [] Code should validate for each input and at least one character type should be selected above
+- [x] Code should validate for each input and at least one character type should be selected above
 - [x] Once prompts are answered then the password should be generated and displayed in an alert or written to the page
 
 These roadmap result will look like thepicture below

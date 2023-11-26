@@ -122,27 +122,6 @@ var questionsToUser = {
 	},
 }
 
-// create function that picks random items from array with certain numbers
-function getMultipleArrayItems(number) {
-	// combine all the array
-	var randomArrayItems = []
-	var allArrays = specialCharacters.concat(
-		numericCharacters,
-		lowerCasedCharacters,
-		upperCasedCharacters
-	)
-	// shuffle the array
-	allArrays.sort(() => Math.random() - 0.5)
-	// console.log(allArrays)
-	// number = 9
-	// Add items of the number from the array
-	for (var i = 0; number > i; i++) {
-		randomArrayItems += allArrays[i % allArrays.length]
-		// console.log(randomArrayItems)
-	}
-	return randomArrayItems
-}
-
 // console.log(getMultipleArrayItems(128))
 
 // Function to prompt user for password options
@@ -155,7 +134,7 @@ function getPasswordOptions() {
 
 	while (!isValidLength || !atLeastOneTypeSelected) {
 		var lengthInput = prompt(
-			"Please type your password's length between 8 - 120. You will get error if your choice is out range."
+			"Please type your password's length between 8 - 128. You will get error if your choice is out range."
 		)
 		// trim the space and convert a string to int
 		userInputPasswordLength = parseInt(lengthInput.trim())
@@ -168,7 +147,7 @@ function getPasswordOptions() {
 		) {
 			isValidLength = true
 		} else {
-			alert(outOfRangeMessage + 'Please type a number. ')
+			alert(outOfRangeMessage)
 			// while continue until the user input a number the right ratnge
 			continue
 		}
@@ -192,9 +171,6 @@ function getPasswordOptions() {
 	return passwordOptions
 }
 
-// object of {length: 8-128, choices: key: blooean}
-// console.log(getPasswordOptions())
-
 // Function for getting a random element from an array
 function getRandomCharacterFromArray(array) {
 	// Generate a random index based on the length of the array
@@ -204,45 +180,37 @@ function getRandomCharacterFromArray(array) {
 
 // pick the true choices of random number from array, fill the rest of the length of number of user length
 function generatePassword() {
-	var password = []
+	var password = ''
 	var passwordOption = getPasswordOptions()
-	// console.log(passwordOption.choices.SpecialCharacter)
+	var selectedArray = []
+	var randomArrayItems = []
+
 	if (passwordOption.choices.SpecialCharacter) {
 		//if true
-		password.push(getRandomCharacterFromArray(specialCharacters))
+		selectedArray = selectedArray.concat(specialCharacters)
 	}
-	// console.log(password)
 	if (passwordOption.choices.Numeric) {
-		//if true
-		password.push(getRandomCharacterFromArray(numericCharacters))
+		selectedArray = selectedArray.concat(numericCharacters)
 	}
-	// console.log(password)
 
 	if (passwordOption.choices.Uppercase) {
-		//if true
-		password.push(getRandomCharacterFromArray(upperCasedCharacters))
+		selectedArray = selectedArray.concat(upperCasedCharacters)
 	}
-	// console.log(password)
 
 	if (passwordOption.choices.Lowercase) {
 		//if true
-		password.push(getRandomCharacterFromArray(lowerCasedCharacters))
+		selectedArray = selectedArray.concat(lowerCasedCharacters)
 	}
-	// console.log("User's selected types: " + password)
+	// Shuffle the array of the combined array inside
+	selectedArray.sort(() => Math.random() - 0.5)
 
-	//count the selected types
-	// console.log('The number of selected types: ' + password.length)
-
-	// The user's choice of number
-	// console.log("The user's selected number: " + passwordOption.length)
-	// substract the number for the remaining number
-	var restOfPassword = passwordOption.length - password.length
-	// console.log('The rest of password: ' + restOfPassword)
 	// generate the random characters for the rest.
-	var restOfCharacters = getMultipleArrayItems(restOfPassword)
+	for (var i = 0; passwordOption.length > i; i++) {
+		randomArrayItems.push(selectedArray[i % selectedArray.length])
+	}
 	// combine user's selection and the rest array
-	var password = password.concat(restOfCharacters)
-	password = password.join('')
+	password = randomArrayItems.join('')
+
 	return password
 }
 
