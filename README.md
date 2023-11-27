@@ -2,7 +2,7 @@
 
 ## About this project
 
-This is a intermideiate Javascript practice, making password generator app for a bootcamp. In this practice, you will see the intermideate technique of Javascript, using xxx. The guidance is provided for the roadmap below.
+This code is a JavaScript project for generating random passwords where the user can specify the length (between 8 and 128 characters) and the inclusion of various character types such as special characters, numbers, uppercase letters, and lowercase letters. It showcases the use of fundamental JavaScript techniques like loops, conditional statements, array manipulation (including concat, push, and sort methods), event handling, and DOM manipulation to interact with the user and display the generated password on a webpage. The project also demonstrates good use of prompt and alert dialogs for user interaction and input validation.
 
 ### Built With
 
@@ -30,7 +30,7 @@ These roadmap result will look like thepicture below
 
 ## Important note
 
-This is a Javascript practice for the bootcamp project.
+This is a Javascript practice for the bootcamp project. While this password generator uses a variety of characters to create complex passwords, it relies on JavaScript's Math.random() for randomness, which is not cryptographically secure. For applications that require high security, consider using a more secure source of randomness.
 
 ### Preview
 
